@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "tutorial-snakebids"
+version = "0.1.0"
+description = ""
+authors = ["Tristan Kuehn <tkuehn@uwo.ca>"]
+readme = "README.md"
+packages = [{include = "tutorial_snakebids"}]
+
+[tool.poetry.dependencies]
+python = ">=3.8,<3.12"
+snakebids = "^0.7.1"
+
+[tool.poetry.group.dev.dependencies]
+black = "^22.10.0"
+snakefmt = "^0.7.0"
+pylint = "^2.15.7"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

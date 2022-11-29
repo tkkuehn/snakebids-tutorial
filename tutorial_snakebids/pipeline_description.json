@@ -1,0 +1,23 @@
+{
+    "Name": "tutorial_snakebids - A Snakebids app to serve as a tutorial.",
+    "BIDSVersion": "1.4.0",
+    "DatasetType": "derivative",
+    "PipelineDescription":
+        {
+            "Name": "tutorial_snakebids",
+            "Version": "0.1.0",
+            "CodeURL": "http://github.com/tkkuehn/tutorial_snakebids",
+            "Author": "Tristan Kuehn",
+            "AuthorEmail": "tkuehn@uwo.ca"
+        },
+    "GeneratedBy": [
+        {
+            "Name": "tutorial_snakebids",
+            "Version": "0.1.0",
+            "CodeURL": "http://github.com/tkkuehn/tutorial_snakebids",
+            "Author": "Tristan Kuehn",
+            "AuthorEmail": "tkuehn@uwo.ca"
+ 
+        }
+    ]
+}
