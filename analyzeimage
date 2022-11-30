@@ -8,8 +8,14 @@ import nibabel as nib
 
 parser = argparse.ArgumentParser()
 parser.add_argument("img")
+parser.add_argument("--property")
 args = parser.parse_args()
 
 img = nib.load(args.img)
 
-print(img.shape)
+if (not args.property) or (args.property == "shape"):
+    print(img.shape)
+elif args.property == "affine":
+    print(img.affine)
+else:
+    raise ValueError("--property must be shape or affine")
