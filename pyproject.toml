@@ -9,6 +9,7 @@ packages = [{include = "tutorial_snakebids"}]
 [tool.poetry.dependencies]
 python = ">=3.8,<3.12"
 snakebids = "^0.7.1"
+nibabel = "^4.0.2"
 
 [tool.poetry.group.dev.dependencies]
 black = "^22.10.0"
