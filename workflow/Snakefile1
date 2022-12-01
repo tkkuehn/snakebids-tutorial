@@ -1,0 +1,7 @@
+rule smooth:
+    input:
+        "bids/sub-control01/ses-01/anat/sub-control01_ses-01_T1w.nii.gz",
+    output:
+        "out/sub-control01_ses-01_shape.txt",
+    shell:
+        "analyzeimage {input} > {output}"

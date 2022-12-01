@@ -1,0 +1,37 @@
+from snakebids import bids, generate_inputs
+
+configfile: "config.yml"
+
+inputs = generate_inputs(bids_dir="bids", pybids_inputs=config["pybids_inputs"], use_bids_inputs=True)
+
+rule all:
+    input:
+        expand(
+            bids(
+                root="out",
+                suffix="{property}.txt",
+                include_subject_dir=False,
+                include_session_dir=False,
+                **inputs.input_wildcards["t1w"],
+            ),
+            property=config["properties"],
+            **inputs.input_lists["t1w"],
+        ),
+
+
+def decide_property(wildcards):
+    if wildcards.property == "SHAPE":
+        return "shape"
+    if wildcards.property == "AFFINE":
+        return "affine"
+
+
+rule smooth:
+    input:
+        "bids/sub-{subject}/ses-{session}/anat/sub-{subject}_ses-{session}_T1w.nii.gz",
+    params:
+        command=decide_property,
+    output:
+        "out/sub-{subject}_ses-{session}_{property}.txt",
+    shell:
+        "./analyzeimage {input} --property {params.command} > {output}"

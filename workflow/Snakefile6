@@ -1,0 +1,39 @@
+from snakebids import bids
+
+
+configfile: "config.yml"
+
+
+rule all:
+    input:
+        expand(
+            bids(
+                root="out",
+                subject="{subject}",
+                session="{session}",
+                suffix="{property}.txt",
+                include_subject_dir=False,
+                include_session_dir=False,
+            ),
+            subject=config["subjects"],
+            session=config["sessions"],
+            property=config["properties"],
+        ),
+
+
+def decide_property(wildcards):
+    if wildcards.property == "SHAPE":
+        return "shape"
+    if wildcards.property == "AFFINE":
+        return "affine"
+
+
+rule smooth:
+    input:
+        "bids/sub-{subject}/ses-{session}/anat/sub-{subject}_ses-{session}_T1w.nii.gz",
+    params:
+        command=decide_property,
+    output:
+        "out/sub-{subject}_ses-{session}_{property}.txt",
+    shell:
+        "./analyzeimage {input} --property {params.command} > {output}"

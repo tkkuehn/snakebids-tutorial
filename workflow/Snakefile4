@@ -1,0 +1,26 @@
+rule all:
+    input:
+        expand(
+            "out/sub-{subject}_ses-{session}_{property}.txt",
+            subject=["control01"],
+            session=["01"],
+            property=["SHAPE", "AFFINE"],
+        ),
+
+
+def decide_property(wildcards):
+    if wildcards.property == "SHAPE":
+        return "shape"
+    if wildcards.property == "AFFINE":
+        return "affine"
+
+
+rule smooth:
+    input:
+        "bids/sub-{subject}/ses-{session}/anat/sub-{subject}_ses-{session}_T1w.nii.gz",
+    params:
+        command=decide_property,
+    output:
+        "out/sub-{subject}_ses-{session}_{property}.txt",
+    shell:
+        "./analyzeimage {input} --property {params.command} > {output}"

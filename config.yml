@@ -1,0 +1,22 @@
+subjects:
+  - control01
+
+sessions:
+  - "01"
+
+properties:
+  - SHAPE
+  - AFFINE
+
+pybids_inputs:
+  t1w:
+    filters:
+      suffix: 'T1w'
+      extension: '.nii.gz'
+      datatype: 'anat'
+    wildcards:
+      - subject
+      - session
+      - acquisition
+      - run
+
